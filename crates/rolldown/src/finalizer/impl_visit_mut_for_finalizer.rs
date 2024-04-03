@@ -340,6 +340,7 @@ impl<'ast, 'me: 'ast> VisitMut<'ast> for Finalizer<'me, 'ast> {
 
     // visit children
     self.visit_expression_match(expr);
+    // walk_expression(self, expr);
   }
 
   fn visit_object_property(&mut self, prop: &mut ast::ObjectProperty<'ast>) {
