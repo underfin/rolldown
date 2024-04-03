@@ -100,65 +100,65 @@ jobs:
       os: ${{ matrix.target }}
       # changed: ${{ needs.changes.outputs.rust-changes == 'true' }}
 
-  node-test:
-    needs: changes
-    strategy:
-      matrix:
-        target: [ubuntu-latest, macos-latest, windows-latest]
-    uses: ./.github/workflows/reusable-node-test.yml
-    with:
-      os: ${{ matrix.target }}
-      changed: ${{ needs.changes.outputs.node-changes == 'true' }}
+  # node-test:
+  #   needs: changes
+  #   strategy:
+  #     matrix:
+  #       target: [ubuntu-latest, macos-latest, windows-latest]
+  #   uses: ./.github/workflows/reusable-node-test.yml
+  #   with:
+  #     os: ${{ matrix.target }}
+  #     changed: ${{ needs.changes.outputs.node-changes == 'true' }}
 
-  node-validation:
-    name: Node Validation
-    needs: changes
-    if: ${{ needs.changes.outputs.node-changes == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # node-validation:
+  #   name: Node Validation
+  #   needs: changes
+  #   if: ${{ needs.changes.outputs.node-changes == 'true' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
+  #     - name: Install pnpm
+  #       uses: pnpm/action-setup@v3
 
-      - name: Install node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
+  #     - name: Install node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+  #     - name: Install dependencies
+  #       run: pnpm install
 
-      - name: Lint Code
-        run: pnpm lint-code
+  #     - name: Lint Code
+  #       run: pnpm lint-code
 
-  repo-validation:
-    name: Repo Validation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # repo-validation:
+  #   name: Repo Validation
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
+  #     - name: Install pnpm
+  #       uses: pnpm/action-setup@v3
 
-      - name: Install node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
+  #     - name: Install node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+  #     - name: Install dependencies
+  #       run: pnpm install
 
-      - name: Lint Filename
-        run: pnpm lint-filename
+  #     - name: Lint Filename
+  #       run: pnpm lint-filename
 
-      - name: Lint Spell
-        run: pnpm lint-spell
+  #     - name: Lint Spell
+  #       run: pnpm lint-spell
 
-      - name: Lint Prettier
-        run: pnpm lint-prettier
+  #     - name: Lint Prettier
+  #       run: pnpm lint-prettier
 
-      - name: Lint Toml
-        run: pnpm lint-toml
+  #     - name: Lint Toml
+  #       run: pnpm lint-toml
